@@ -7,10 +7,10 @@
             <div class="card-panel blue lighten-5 z-depth-1">
               <div class="valign-wrapper">
                 <div class="col s2">
-                  <i class="material-icons medium">people</i>
+                  <i class="material-icons" style="font-size:3rem;">people</i>
                 </div>
-                <div class="col s10">
-                  <span class="black-text" style="font-size: 20px;">
+                <div class="col s10" style="min-width: 103px;">
+                  <span class="black-text" style="font-size: 15px;">
                     Enrolled Students : {{ $student_confirmed }}
                   </span>
                 </div>
@@ -21,10 +21,10 @@
             <div class="card-panel blue lighten-5 z-depth-1">
               <div class="valign-wrapper">
                 <div class="col s2">
-                  <i class="material-icons medium">people_outline</i>
+                  <i class="material-icons" style="font-size:3rem;">people_outline</i>
                 </div>
-                <div class="col s10">
-                  <span class="black-text" style="font-size: 20px;">
+                <div class="col s10" style="min-width: 103px;">
+                  <span class="black-text" style="font-size: 15px;">
                     Unconfirmed Students : {{ $student_unconfirmed }}
                   </span>
                 </div>
@@ -35,10 +35,10 @@
             <div class="card-panel blue lighten-5 z-depth-1">
               <div class="valign-wrapper">
                 <div class="col s2">
-                  <i class="material-icons medium">people</i>
+                  <i class="material-icons" style="font-size:3rem;">people</i>
                 </div>
-                <div class="col s10">
-                  <span class="black-text" style="font-size: 20px;">
+                <div class="col s10" style="min-width: 103px;">
+                  <span class="black-text" style="font-size: 15px;">
                     Total Students : {{ $total_students }}
                   </span>
                 </div>
@@ -51,10 +51,10 @@
             <div class="card-panel blue lighten-5 z-depth-1">
               <div class="valign-wrapper">
                 <div class="col s2">
-                  <i class="material-icons medium">account_box</i>
+                  <i class="material-icons" style="font-size:3rem;">account_box</i>
                 </div>
-                <div class="col s10">
-                  <span class="black-text" style="font-size: 20px;">
+                <div class="col s10" style="min-width: 103px;">
+                  <span class="black-text" style="font-size: 15px;">
                     Teachers : {{ $teacher }}
                   </span>
                 </div>
@@ -65,10 +65,10 @@
             <div class="card-panel blue lighten-5 z-depth-1">
               <div class="valign-wrapper">
                 <div class="col s2">
-                  <i class="material-icons medium">layers</i>
+                  <i class="material-icons" style="font-size:3rem;">layers</i>
                 </div>
-                <div class="col s10">
-                  <span class="black-text" style="font-size: 20px;">
+                <div class="col s10" style="min-width: 103px;">
+                  <span class="black-text" style="font-size: 15px;">
                     Subject : {{ $subject }}
                   </span>
                 </div>
@@ -79,10 +79,10 @@
             <div class="card-panel blue lighten-5 z-depth-1">
               <div class="valign-wrapper">
                 <div class="col s2">
-                  <i class="material-icons medium">view_comfy</i>
+                  <i class="material-icons" style="font-size:3rem;">view_comfy</i>
                 </div>
-                <div class="col s10">
-                  <span class="black-text" style="font-size: 20px;">
+                <div class="col s10" style="min-width: 103px;">
+                  <span class="black-text" style="font-size: 15px;">
                     Section : {{ $section }}
                   </span>
                 </div>

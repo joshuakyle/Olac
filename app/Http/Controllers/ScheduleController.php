@@ -74,14 +74,15 @@ class ScheduleController extends Controller
             return back()->withErrors($validator)
                         ->withInput();
         }else{
-
-            $section = $this->section->where('id',$request->get('section'))->first();
-            $subject = $this->subject->where('id',$request->get('subject'))->first();
-            if($section->year != $subject->year){
-                return back()->with('status','Subject : '.$subject->subject_name.' , is not applicable for '.getYearText($subject->year).' sections.');
+            // check if the subject has the same year level with section
+            if(!is_null($request->get('subject'))){
+                $section = $this->section->where('id',$request->get('section'))->first();
+                $subject = $this->subject->where('id',$request->get('subject'))->first();
+                if($section->year != $subject->year){
+                    return back()->with('status','Subject : '.$subject->subject_name.' , is not applicable for '.getYearText($subject->year).' sections.');
+                }
             }
 
-            if($section)
             $id = $this->schedule->insertGetId([
                 'teacher_id' => $request->get('teacher'),
                 'subject_id' => $request->get('subject'),

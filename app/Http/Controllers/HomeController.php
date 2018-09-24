@@ -81,7 +81,7 @@ class HomeController extends Controller
             //validate if section exist
             if(empty($section->section_name)){
                 //no section
-                return response()->json(['status'=>0,'message'=>'Student does not belong to this Subject1']);
+                return response()->json(['status'=>0,'message'=>'Student does not belong to this Subject']);
             }
 
             //set table name year_sectionname
@@ -94,7 +94,7 @@ class HomeController extends Controller
             if(!empty($table_details)){
 
                 //check if the student attendace already check within the day
-                if($table_details == date('Y-m-d')){
+                if($table_details->updated_at == date('Y-m-d')){
                     //if the student is already updated within the day
                     return response()->json(['status'=>0,'message'=>'Student already scanned.']);
                 }
@@ -112,7 +112,7 @@ class HomeController extends Controller
                     'student_id' => $student_details->id,
                     'subject_id' => $section->subject_id,
                     'attendance' => 1,
-                    'absent_dates' => '[]',
+                    'absent_dates' => '',
                     'total_attendance' => 1,
                     'updated_at' => date('Y-m-d')
                 ]);
@@ -130,7 +130,30 @@ class HomeController extends Controller
         $data['module_header'] = 'Attendance > Checking';
         $data['module_name'] = 'attendance';
         $data['schedule_id'] = $request->get('schedule_id');
+        $data['schedule'] = $this->schedule->where('schedule_id',$request->get('schedule_id'))->first();
         return view('pages.teacher.attendance',$data);
+    }
+
+    public function stopAttendandace(Request $request)
+    {
+       $date = date('Y-m-d');
+       $section = $this->section->where('id',$request->get('section_id'))->first();
+       $table = $section->year.'_'.strtolower($section->section_name);
+       $absents = DB::table($table)->where('updated_at','<>',$date)->where('subject_id',$request->get('subject_id'))->get();
+       if(!empty($absents)){
+        $count = 0;
+        foreach ($absents as $val) {
+            $count++;
+            $absent_dates = $val->absent_dates.'|'.$date;
+            $absent_dates = (string)$absent_dates;
+            DB::table($table)->where('attendance_id',$val->attendance_id)->update(['absent_dates'=>$absent_dates,
+                'updated_at'=>$date]);
+        }
+
+        return redirect()->route('teacherIndex')->with(['status'=>'Number of absent(s) :'.$count]);
+       }
+       
+
     }
 
 }

@@ -17,7 +17,7 @@ use App\Model\Payment;
 use Mail;
 use QRCode;
 use PDF;
-
+use DB;
 class StudentController extends Controller
 {
     public function __construct(){
@@ -259,8 +259,9 @@ class StudentController extends Controller
             $i = $this->student->whereIn('id',$request->ids)->update(['status'=> 1]);
             $emails = [];
             foreach ($guardian_details as $value) {
-                $section_id = $this->getAvailabelSection($value->old_year_level+1);
-                $this->student->where('id',$value->id)->update(['section_id'=>$section_id]);
+                $section = $this->getAvailabelSection($value->old_year_level+1);
+                $this->createAttendance($section,$value->id);
+                $this->student->where('id',$value->id)->update(['section_id'=>$section->id]);
                 $email = $value->guardian_email;
                 Mail::send('email', ['key' => url('/onlinepayment',$parameters = ['secret_key' => $this->secret_key,'student_id'=>$value->id])], function($message) use ($email)
                 {
@@ -275,6 +276,30 @@ class StudentController extends Controller
             return response()->json(['status' => 0,'message' => 'Confirmation Failed, Please try again.']);
         }
     }
+
+    private function createAttendance($section,$student_id)
+    {
+        $table = $section->year.'_'.strtolower($section->section_name);
+        //get all available subject for specific section
+        $subjects = $this->subject->select('subjects.id')->join('schedule as s','s.subject_id','subjects.id')->where('s.section_id',$section->id)->get();
+
+        // insert initial data attendance for every subject
+        foreach ($subjects as $key => $value) {
+            //for transferees and late enrollees
+            $at_table = DB::table($table)->select('total_attendance')->where('subject_id',$value->id)->first();
+
+            //insert available subject
+            DB::table($table)->insert([
+                'student_id' => $student_id,
+                'subject_id' => $value->id,
+                'attendance' => 0,
+                'absent_dates' => '',
+                'total_attendance' => isset($at_table->total_attendance) ? $at_table->total_attendance : 0,
+                'updated_at' => date('Y-m-d')
+            ]);
+        }
+    }
+
     public function paymentView($secretKey,$id)
     {
         if($secretKey == $this->secret_key){
@@ -301,7 +326,7 @@ class StudentController extends Controller
         foreach ($sections_per_year as $key => $val) {
             $students = $this->student->where('section_id',$val->id)->where('status',1)->count();
             if($students < $val->capacity){
-                return $val->id;
+                return $val;
                 break;
             }
         }

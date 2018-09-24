@@ -3,12 +3,20 @@
 @section('content')
 <div class="row">
   <div class="col s12">
-  <input type="hidden" value="{{ $schedule_id }}" id="schedule_id"/>
   <div class="row">
     <div class="camera-box">
       <div id="reader" style="width:300px;height:250px"></div>
       <div class="row">
         <div id="message" class="text-center"></div>
+      </div>
+      <div class="row">
+        <form method="POST" action="{{ route('end-attendance')}}">
+          @csrf
+          <input type="hidden" value="{{ $schedule_id }}" id="schedule_id" name="schedule_id"/>
+          <input type="hidden" value="{{ $schedule->subject()->id }}" id="subject_id" name="subject_id"/>
+          <input type="hidden" value="{{ $schedule->section()->id }}" id="section_id" name="section_id"/>
+        <button class="btn red">End Attendance</button>
+        </form>
       </div>
     </div>
   </div>

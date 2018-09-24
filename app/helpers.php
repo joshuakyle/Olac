@@ -154,7 +154,7 @@ if(!function_exists("getStudentStatus")){
 
 if(!function_exists("getStoragePath")){
     function getStoragePath(){
-        return 'E:\final\kyle\Thesis/Thesis/storage/app/public';
+        return storage_path().'/app/public';
     }
 }
 

@@ -71,6 +71,7 @@ Route::group(['middleware'=>['auth']],function(){
 	Route::get('/attendance/sections', 'HomeController@teacherindex')->name('teacherIndex');
 	Route::get('/grades/sections', 'TeacherController@gradesIndex')->name('gradesIndex');
 	Route::post('/start/attendance', 'HomeController@attendanceIndex')->name('attendance');
+	Route::any('/end/attendance', 'HomeController@stopAttendandace')->name('end-attendance');
 	Route::post('/qrcheck', 'HomeController@checkUser')->name('checkUser');
 	Route::post('/qrgenerate', 'StudentController@qrgenerate')->name('qrgenerate');
 	Route::get('/section/students/{scheduleId}', 'TeacherController@studentList')->name('studentList');

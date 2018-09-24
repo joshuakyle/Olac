@@ -176,7 +176,9 @@
               getSchedOption(response.year,0,response.schedule_id);
               $('#_name').val(response.subject_name);
               $('#_id').val(response.id);
-              $('#_schedule').append('<option value="'+response.schedule_id+'" selected>'+response.year+'-'+response.section_name+'('+response.schedule_name+')</option>').material_select();
+              if(response.schedule_id != null){
+                $('#_schedule').append('<option value="'+response.schedule_id+'" selected>'+response.year+'-'+response.section_name+'('+response.schedule_name+')</option>').material_select();
+              }
               $('#_schedule').val(0).material_select();
               $('#_year').val(response.year).material_select();
             $('#modal2').modal('open');

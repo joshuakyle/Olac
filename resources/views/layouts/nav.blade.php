@@ -145,7 +145,7 @@
 </main>
 <footer class="page-footer">
   <div class="footer-copyright">
-    <div class="container right-align" style="font-size: 15px; padding-top: 11px">
+    <div class="container center-align" style="font-size: 13px; padding-top: 11px">
     © Our Lada of Assumption College 2018
     </div>
   </div>
@@ -233,7 +233,7 @@
                             html += '<td>'+getYearText(val.old_year_level+1)+'</td>';
                             html += '<td>'+val.guardian_email+'/'+val.guardian_number+'</td>';
                             html += '<td>'+val.created_at+'</td>';
-                            html += '<td><form method="POST" action ="'+url+'">'+csrf+'<input type="hidden" name="id" value="'+val.id+'"><button type="submit" class="btn">Download Details</button></form></td>';
+                            html += '<td><form method="POST" action ="'+url+'">'+csrf+'<input type="hidden" name="id" value="'+val.id+'"><button type="submit" class="btn"><i class="material-icons">cloud_download</i></button></form></td>';
                             html += '</tr>';
                         });
                         $('#table-body').append(html);

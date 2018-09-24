@@ -36,8 +36,8 @@
                     <tr class="{{ strtolower(str_replace(' Year', '', getYearText($student->old_year_level+1)))}}">
                         <td>{{ generateStudentNumber($student->old_year_level+1,$student->id) }}</td>
                         <td>{{ $student->last_name}}, {{$student->first_name}} {{ getMiddleInitial($student->middle_name) }}.</td>
-                        <td>{{ $student->section()->section_name }}</td>
-                        <td>{{ getYearText($student->year+1) }}</td>
+                        <td>{{ isset($student->section()->section_name) ? $student->section()->section_name : 'Need confirmation' }}</td>
+                        <td>{{ getYearText($student->old_year_level+1) }}</td>
                         <td>{{ getStudentStatus($student->status) }}</td>
                         <td>{{ $student->guardian_name }}/{{ $student->guardian_email }}/{{ $student->guardian_number }}</td>
                         <td>
@@ -46,7 +46,7 @@
                             <input type="hidden" name="qr" value="{{ $student->qr_code }}">
                             <input type="hidden" name="last_name" value="{{ $student->last_name }}">
                             <button type="button" data-id="{{ $student->id }}" class="btn waves-effect blue darken-3 info-trigger"><i class="material-icons">edit</i></button>
-                            <button type="submit" class="btn waves-effect ">QRCode</button>
+                            <button type="submit" class="btn waves-effect "><i class="material-icons">crop_free</i></button>
                             </form>
                         </td>
                     </tr>
