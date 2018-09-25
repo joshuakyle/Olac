@@ -122,6 +122,7 @@
     <div class="row">
       <div class="input-field col s2 right-align">
        <button type="button" class="btn waves-effect waves-light blue darken-3" id="action">Submit</button>
+       <button type="button" class="btn waves-effect waves-light red darken-3" id="reject">Reject</button>
      </div>
    </div>
  </form>
@@ -141,7 +142,6 @@
         @endif
     </div>
     @yield('content')
-    
 </main>
 <footer class="page-footer">
   <div class="footer-copyright">
@@ -210,6 +210,7 @@
         $('#unconfirmed').click(function(){
             var array_ids = [];
             $('#action').attr('disabled',true);
+            $('#reject').attr('disabled',true);
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -233,7 +234,7 @@
                             html += '<td>'+getYearText(val.old_year_level+1)+'</td>';
                             html += '<td>'+val.guardian_email+'/'+val.guardian_number+'</td>';
                             html += '<td>'+val.created_at+'</td>';
-                            html += '<td><form method="POST" action ="'+url+'">'+csrf+'<input type="hidden" name="id" value="'+val.id+'"><button type="submit" class="btn"><i class="material-icons">cloud_download</i></button></form></td>';
+                            html += '<td><form method="POST" action ="'+url+'">'+csrf+'<input type="hidden" name="id" value="'+val.id+'"><button type="submit" class="btn reg-form-dl"><i class="material-icons">cloud_download</i></button></form></td>';
                             html += '</tr>';
                         });
                         $('#table-body').append(html);
@@ -248,8 +249,10 @@
 
                             if(array_ids.length == 0 ){
                                 $('#action').attr('disabled',true);
+                                $('#reject').attr('disabled',true);
                             }else{
                                 $('#action').attr('disabled',false);
+                                $('#reject').attr('disabled',false);
                             }
                         });
 
@@ -258,6 +261,7 @@
                           content: 'Are you sure to submit the form?',
                           buttons: {
                             confirm: function () {
+                                loadingStart(1);
                               $.ajaxSetup({
                                     headers: {
                                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -268,13 +272,50 @@
                                     url: "{{ route('update-studet-status') }}",
                                     data: {'ids':array_ids},
                                     success: function (data) {
-                                        if(data.status){
+                                        
+                                        if(data.status == 1){
                                             window.Materialize.toast(data.message,3000);
                                             $('#enroll-modal').modal('close');
+                                        }else if(data.status == 2){
+                                            $.each(data.faileds,function(i,val){
+                                                window.Materialize.toast(val.message,5000);
+                                            });
                                         }else{
                                             window.Materialize.toast(data.message,5000);
                                             $('#enroll-modal').modal('close');
                                         }
+                                        removeLoading(1);
+                                    },
+                                });
+                            },
+                            cancel: function () {
+                              
+                            },
+                          }
+                        });
+
+                        $('#reject').confirm({
+                          title: 'Confirm!',
+                          content: 'Are you sure to reject the student(s)?',
+                          buttons: {
+                            confirm: function () {
+                                loadingStart(0);
+                              $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
+                                $.ajax({
+                                type: "POST",
+                                    url: "{{ route('update-studet-reject') }}",
+                                    data: {'ids':array_ids},
+                                    success: function (data) {
+                                        
+                                        if(data.status == 1){
+                                            window.Materialize.toast(data.message,3000);
+                                            $('#enroll-modal').modal('close');
+                                        }
+                                        removeLoading(0);
                                     },
                                 });
                             },
@@ -287,6 +328,34 @@
                 }
             });
         });
+        function loadingStart($option){
+            if($option == 1){
+                $('#action').text('Loading...');
+            }else{
+                $('#reject').text('Loading...');
+            }
+
+            $('#action').attr('disabled',true);
+            $('#reject').attr('disabled',true);
+            $('.checkbox-enroll').attr('disabled',true);
+            $('.reg-form-dl').attr('disabled',true);
+            
+            
+        }
+
+        function removeLoading($option){
+            if($option == 1){
+                $('#action').text('Submit');
+            }else{
+                $('#reject').text('Reject');
+            }
+
+            $('#action').attr('disabled',false);
+            $('#reject').attr('disabled',false);
+            $('.checkbox-enroll').attr('disabled',false);
+            $('.reg-form-dl').attr('disabled',false);
+            
+        }
 
         function getYearText(yearValue){
             if(yearValue == 1){

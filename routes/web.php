@@ -65,6 +65,8 @@ Route::group(['middleware'=>['auth']],function(){
 		Route::get('/schedule/availability/{id}', 'ScheduleController@getSched');
 		Route::get('/students/unconfirmed', 'StudentController@getUnconfirmed');
 		Route::get('/students/unconfirmed/details', 'StudentController@getUnconfirmedDetails');
+		Route::post('/student/reject', 'StudentController@rejectStudents')->name('update-studet-reject');
+
 	// });
 
 	//for teachers
@@ -87,6 +89,7 @@ Route::get('/student/grade/list', 'StudentController@studentGradeList')->name('s
 Route::post('/student/updatepin', 'StudentController@updatePin')->name('update-pin');
 Route::post('/student/update-studet-status', 'StudentController@updateStudentStatus')->name('update-studet-status');
 Route::any('/onlinepayment/{secretKey}/{id}', 'StudentController@paymentView');
+Route::any('/registration', 'StudentController@registrationView');
 Route::post('/downloadform', 'StudentController@generateForm')->name('download-pdf');
 
 Route::get('/enroll', 'EnrollmentController@index')->name('enroll');

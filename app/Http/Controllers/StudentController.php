@@ -255,13 +255,21 @@ class StudentController extends Controller
     public function updateStudentStatus(Request $request)
     {
         $guardian_details = $this->student->whereIn('id',$request->ids)->get();
+        $faileds = [];
+        $i = 0;
         if(!empty($request->ids)){
-            $i = $this->student->whereIn('id',$request->ids)->update(['status'=> 1]);
+
             $emails = [];
             foreach ($guardian_details as $value) {
                 $section = $this->getAvailabelSection($value->old_year_level+1);
+                if(!isset($section->year)){
+                    $faileds[] = ['message'=>$value->last_name.' was not accepted, Sections for '.getYearText($value->old_year_level+1).' are already full'];
+                    continue;
+                }
                 $this->createAttendance($section,$value->id);
+                $this->checkStudentIfOld($value);
                 $this->student->where('id',$value->id)->update(['section_id'=>$section->id]);
+                $i++;
                 $email = $value->guardian_email;
                 Mail::send('email', ['key' => url('/onlinepayment',$parameters = ['secret_key' => $this->secret_key,'student_id'=>$value->id])], function($message) use ($email)
                 {
@@ -269,8 +277,9 @@ class StudentController extends Controller
                 });
             }
 
-            
-
+            if(!is_null($faileds)){
+                return response()->json(['status'=> 2 ,'faileds' => $faileds]);
+            }
             return response()->json(['status' => 1,'message' => 'Total of number of Confirmed students : '.$i]);
         }else{
             return response()->json(['status' => 0,'message' => 'Confirmation Failed, Please try again.']);
@@ -298,6 +307,10 @@ class StudentController extends Controller
                 'updated_at' => date('Y-m-d')
             ]);
         }
+    }
+
+    private function checkStudentIfOld($value)
+    {
     }
 
     public function paymentView($secretKey,$id)
@@ -332,5 +345,23 @@ class StudentController extends Controller
         }
 
         return false;
+    }
+
+    public function rejectStudents(Request $request)
+    {
+        $student = $this->student->whereIn('id',$request->ids)->get();
+         foreach ($student as $value) {
+                $email = $value->guardian_email;
+                //send email to guardian
+                Mail::send('emailfailedreg',[], function($message) use ($email)
+                {
+                    $message->to($email)->subject('OLAC Enrollment.');
+                });
+                //delete student
+                $this->student->where('id',$value->id)->delete();
+
+            }
+
+        return response()->json(['status' => 1,'message' => 'Student rejection successfully.']);
     }
 }

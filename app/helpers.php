@@ -249,7 +249,7 @@ if(!function_exists("peso")){
     {
         return number_format($int,2);
     }
-
 }
+
 }
 

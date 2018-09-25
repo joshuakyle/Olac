@@ -65,7 +65,7 @@ class EnrollmentController extends Controller
 
         $section_id = $this->getAvailabelSection($old ? $old_year_level : $request->get("grade/level")+1);
         if(is_null($section_id)){
-           return response()->json(['status'=>2,'message'=>'Sorry full students for '.getYearText($old_school_year+1)]);
+           return response()->json(['status'=>2,'message'=>'Sorry full students for '.getYearText($old_year_level+1),'year'=>getYearText($old_year_level+1).' level']);
         }
  
         $student_id = $this->student->insertGetId([
@@ -130,7 +130,7 @@ class EnrollmentController extends Controller
             }
         }
 
-        return false;
+        return null;
     }
 
     public function getStudentDetails($lastname,$middle,$firstname)

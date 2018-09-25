@@ -11,6 +11,7 @@ bgcolor
 					<div class="card-panel">
 						<div class="row">
 							<div style="margin: auto;">
+								@if(isset($student->guardian_name))
 								<h5>Hello, {{ $student->guardian_name }}</h5>
 								<p>Payment here</p>
 								<form method="POST" action="{{ route('download-pdf') }}">
@@ -18,6 +19,9 @@ bgcolor
 								<input value="{{ $student->id }}"" name="id" type="hidden">
 								<button type="submit" class="btn">Download Registration Form</button>
 								</form>
+								@else
+								<h5>Broken url, please contact +123123 for help.</h5>
+								@endif
 							</div>
 						</div>
 					</div>

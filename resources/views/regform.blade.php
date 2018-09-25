@@ -22,12 +22,13 @@
 			<table style="margin-top: 20px; width: 100%;">
 				<tr>
 					<td colspan="2">Student No.: {{ generateStudentNumber($student->old_year_level+1,$student->id) }}</td>
-					<td colspan="3" style="text-align: center;">School Year: {{ getSchoolYear() }}</td>
+					<td colspan="2" style="text-align: center;">School Year: {{ getSchoolYear() }}</td>
+					<td colspan="2" style="text-align: center;">Section: {{ isset($student->section()->section_name) ? $student->section()->section_name : "( PENDING )" }}</td>
 				</tr>
 				<tr>
-					<td colspan="3">Grade/Level: {{ getYearText($student->old_year_level+1) }}</td>
-					<td colspan="1" style=" text-align: right;"><input type="checkbox" {{ $student->old_school_name == 'Our Lady of Assumption College' ? '' : 'checked' }}> New Student</td>
-					<td colspan="1" style="text-align: right;"><input type="checkbox" {{ $student->old_school_name == 'Our Lady of Assumption College' ? 'checked' : ''  }}> Old Student</td>
+					<td colspan="2">Year Level: {{ getYearText($student->old_year_level+1) }}</td>
+					<td colspan="2" style=" "><input type="checkbox" {{ $student->old_school_name == 'Our Lady of Assumption College' ? '' : 'checked' }}> New Student</td>
+					<td colspan="2" style=""><input type="checkbox" {{ $student->old_school_name == 'Our Lady of Assumption College' ? 'checked' : ''  }}> Old Student</td>
 				</tr>
 			</table>
 			<table style="width: 100%;">
@@ -74,7 +75,7 @@
 					<td>SY:{{ $student->old_school_year }}</td>
 				</tr>
 				<tr>
-					<td colspan="5">School Address: {{ $student->school_address }}</td>
+					<td colspan="5">Previous School Address: {{ $student->old_school_address }}</td>
 				</tr>
 			</table>
 			<table style="width: 100%">
@@ -111,8 +112,8 @@
 				</tr>
 				<tr>
 					<td>Books:</td>
-					<?php $book = $payment->book; ?>
-					<td>{{ $book[$student->old_year_level+1] }}</td>
+					<?php $book = explode('|',$payment->book); ?>
+					<td>{{ $book[$student->old_year_level] }}</td>
 				</tr>
 				<tr></tr>
 			</table>

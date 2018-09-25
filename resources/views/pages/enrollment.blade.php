@@ -130,7 +130,7 @@ bgcolor
 											<label for="gradelevel">Grade/Level</label>
 										</div>
 										<div class="input-field col s4">
-											<input id="school_year" name="school_year" type="text" required>
+											<input id="school_year" name="school_year" placeholder="0000-0000" type="text" required>
 											<label for="school_year">SY</label>
 										</div>
 									</div>
@@ -247,7 +247,7 @@ bgcolor
 							<div id="page-4" class="welcome">
 								<div class="center-align">
 								<h4>Thank you!</h4>
-								<label class="red">Please be informed that we will send an email to your guardian email address within a day (working day). 
+								<label style="color:red">Please be informed that we will send an email to your guardian email address within a day (working day). 
 								For the registration form and Payment Url (for online payment). Thank you.</label>
 								</div>
 								<hr/>
@@ -274,7 +274,7 @@ bgcolor
 							<div id="page-5">
 								<div class="row">
 									<div style="text-align: center;padding: 50px;">
-									<h4> We are sorry to say, That we already met the total of enrollees this year.</h4>
+									<h4> We are sorry to say, That we already met the total of enrollees for <span class="year_level" style="color:red"></span> this year.</h4>
 									<br/>
 									<div class="center-align">
 										<form method="get" action="{{url('/index')}}">
@@ -314,6 +314,7 @@ bgcolor
 	$('#page-4').hide();
 	$('#page-5').hide();
 	$(function(){
+		$('#school_year').mask('0000-0000');
 		$("#form-1").submit(function(e){
 			showPage(2,1);
 			return false;
@@ -421,14 +422,14 @@ bgcolor
 						$('#progress-id').hide();
 					}else if(data.status == 2){
 						$('#page-3').hide(1000);
+						$('.year_level').text(data.year);
 						$('#page-5').show(1000);
-						window.Materialize.toast(data.message);
 						$('#progress-id').hide();
 					}else if(data.status == 3){
 						$('#page-3').hide(1000);
 						$('#page-2').show(1000);
 						$('#progress-id').hide();
-						window.Materialize.toast(data.message);
+						window.Materialize.toast(data.message,7000);
 					}
 				},
 				error: function (data) {
