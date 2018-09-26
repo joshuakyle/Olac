@@ -41,15 +41,19 @@
                 <?php if($school->status ==1 ){
                         $status = '<strong style="color:green">Ongoing</strong>';
                     }else{
-                        $status = '<strong style="color:red">Stopped</strong>';
+                        $status = '<strong style="color:red">Paused</strong>';
                     }
                 ?>
                 <p for="school_year">School Enrollment Status : {!! $status !!}</p>
                 @if($school->status == 1)
-                <button type="button" data-value="0" class="btn-enroll btn red">Stop Enrollment</button>
+                <button type="button" data-value="0" class="btn-enroll btn blue">Pause Enrollment</button>
                 @else
                 <button type="button" data-value="1" class="btn-enroll btn green">Start Enrolllment</button>
                 @endif
+            </div>
+            <div class="row">
+                <p>Note: End school year will clear all the pending applicants and will set all the students in the database as (old students). And will not be able to see in the reports/dashboard and in the student list</p>
+                <button type="button" id="btn-end-school" class="btn red">End School Year</button>
             </div>
         </div>
     </div>
@@ -172,6 +176,73 @@
                                 type: "POST",
                                 cache: false,
                                 url : "{{route('update-enrollment')}}",
+                                data: {"_token": "{{ csrf_token() }}"},
+                                success: function(data) {
+                                  if (data.status == 1) {
+                                    location.reload();
+                                  }else{
+                                    window.Materialize.toast('Sorry, Please try again.',2000);
+                                  }
+                                }
+                           });
+                      }else{
+                        window.Materialize.toast(data.message,2000);
+                      }
+                    }
+                   });
+                }
+            },
+            cancel: function () {
+                //close
+            },
+        },
+        onContentReady: function () {
+            // bind to events
+            var jc = this;
+            this.$content.find('form').on('submit', function (e) {
+                 
+                e.preventDefault();
+                // jc.$$formSubmit.trigger('click'); // reference the button and click it
+            });
+        }
+    });
+
+    $('#btn-end-school').confirm({
+        title: 'Please Authenticate Yourself!',
+        content: '' +
+        '<form action="" class="formName">' +
+        '<div class="form-group">' +
+        '<label>Enter password here</label>' +
+        '<input type="password" placeholder="Password" class="name form-control" id="password" required />' +
+        '</div>' +
+        '</form>',
+        buttons: {
+            formSubmit: {
+                text: 'Submit',
+                btnClass: 'btn-blue',
+                action: function () {
+                    var password = this.$content.find('#password').val();
+                    if(!password){
+                        $.alert('Provide a password');
+                        return false;
+                    }
+
+                    $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url : "{{route('admin-data')}}",
+                    data: {"_token": "{{ csrf_token() }}",data:password},
+                    success: function(data) {
+                      if (data.status == 1) {
+                             $.ajaxSetup({
+                                headers: {
+                                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                              });
+                            $.ajax({
+                                type: "POST",
+                                cache: false,
+                                url : "{{route('end-school-year')}}",
                                 data: {"_token": "{{ csrf_token() }}"},
                                 success: function(data) {
                                   if (data.status == 1) {

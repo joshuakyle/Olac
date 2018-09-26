@@ -194,4 +194,11 @@ class HomeController extends Controller
 
         return response()->json(['status' => 1]);
     }
+
+    public function endSchoolYear()
+    {
+        $this->student->where('old_student',0)->update(['old_student' => 1,'section_id'=>null]);
+        $this->school->where('id',1)->update(['status' => 0]);
+        return response()->json(['status'=>1,'message'=>'Ending the school was successful.']);
+    }
 }

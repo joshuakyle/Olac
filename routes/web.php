@@ -71,6 +71,8 @@ Route::group(['middleware'=>['auth']],function(){
 		Route::post('/admin/data', 'HomeController@adminData')->name('admin-data');
 		Route::post('/school/update', 'HomeController@updateSchool')->name('update-school-data');
 		Route::post('/school/enrollment', 'HomeController@updateEnrollment')->name('update-enrollment');
+		Route::any('/end/school/year', 'HomeController@endSchoolYear')->name('end-school-year');
+
 
 	// });
 
