@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 21, 2018 at 07:14 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Generation Time: Sep 26, 2018 at 05:08 PM
+-- Server version: 10.1.33-MariaDB
+-- PHP Version: 7.2.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,33 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `1_mahogani`
+-- Table structure for table `1_first-a`
 --
 
-CREATE TABLE `1_mahogani` (
-  `attendance_id` int(10) UNSIGNED NOT NULL,
-  `grade` int(11) DEFAULT NULL,
-  `student_id` int(11) NOT NULL,
-  `subject_id` int(11) NOT NULL,
-  `attendance` int(11) NOT NULL,
-  `total_attendance` int(11) NOT NULL,
-  `absent_dates` varchar(555) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `1_mahogani`
---
-
-INSERT INTO `1_mahogani` (`attendance_id`, `grade`, `student_id`, `subject_id`, `attendance`, `total_attendance`, `absent_dates`) VALUES
-(1, NULL, 34, 18, 1, 1, '[]');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `2_narra`
---
-
-CREATE TABLE `2_narra` (
+CREATE TABLE `1_first-a` (
   `attendance_id` int(10) UNSIGNED NOT NULL,
   `grade` int(11) DEFAULT NULL,
   `student_id` int(11) NOT NULL,
@@ -62,13 +39,23 @@ CREATE TABLE `2_narra` (
   `absent_dates` varchar(555) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `1_first-a`
+--
+
+INSERT INTO `1_first-a` (`attendance_id`, `grade`, `student_id`, `subject_id`, `attendance`, `total_attendance`, `updated_at`, `absent_dates`) VALUES
+(1, NULL, 37, 26, 0, 0, '2018-09-23', ''),
+(2, NULL, 37, 26, 0, 0, '2018-09-24', ''),
+(3, NULL, 37, 26, 0, 0, '2018-09-24', ''),
+(4, NULL, 38, 26, 0, 0, '2018-09-24', '');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `3_buko`
+-- Table structure for table `1_first-b`
 --
 
-CREATE TABLE `3_buko` (
+CREATE TABLE `1_first-b` (
   `attendance_id` int(10) UNSIGNED NOT NULL,
   `grade` int(11) DEFAULT NULL,
   `student_id` int(11) NOT NULL,
@@ -79,19 +66,31 @@ CREATE TABLE `3_buko` (
   `absent_dates` varchar(555) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `1_first-b`
+--
+
+INSERT INTO `1_first-b` (`attendance_id`, `grade`, `student_id`, `subject_id`, `attendance`, `total_attendance`, `updated_at`, `absent_dates`) VALUES
+(1, NULL, 38, 27, 0, 0, '2018-09-23', ''),
+(2, NULL, 39, 27, 0, 0, '2018-09-23', ''),
+(3, NULL, 38, 27, 0, 0, '2018-09-24', ''),
+(4, NULL, 37, 27, 0, 0, '2018-09-24', ''),
+(5, NULL, 39, 27, 0, 0, '2018-09-24', '');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `4_santol`
+-- Table structure for table `2_second-a`
 --
 
-CREATE TABLE `4_santol` (
+CREATE TABLE `2_second-a` (
   `attendance_id` int(10) UNSIGNED NOT NULL,
   `grade` int(11) DEFAULT NULL,
   `student_id` int(11) NOT NULL,
-  `section_id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL,
   `attendance` int(11) NOT NULL,
   `total_attendance` int(11) NOT NULL,
+  `updated_at` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `absent_dates` varchar(555) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -122,16 +121,6 @@ CREATE TABLE `first_year_grades` (
   `subject_id` int(11) NOT NULL,
   `quarter` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `first_year_grades`
---
-
-INSERT INTO `first_year_grades` (`grade_id`, `score`, `student_id`, `subject_id`, `quarter`) VALUES
-(13, 123, 34, 19, 1),
-(14, 12, 34, 19, 2),
-(15, 124, 34, 19, 3),
-(16, 12, 34, 19, 4);
 
 -- --------------------------------------------------------
 
@@ -207,12 +196,18 @@ CREATE TABLE `parent` (
 --
 
 INSERT INTO `parent` (`parent_id`, `parent_name`, `parent_relation`, `student_id`, `contact_number`, `occupation`) VALUES
-(25, 'asd', 'Mother', 34, 123, 'asd'),
-(26, 'asd', 'Father', 34, 123, 'asd'),
-(27, 'qweqwe', 'Mother', 35, 123123123, 'qweqwe'),
-(28, 'asd', 'Father', 35, 123123, 'qweqwe'),
-(29, 'Kulas', 'Mother', 36, 123242, 'Pigo'),
-(30, 'Kulas', 'Father', 36, 12323, 'Pigo');
+(31, 'Beta', 'Mother', 37, 1231231231, 'CEO'),
+(32, 'test', 'Father', 37, 1231231231, 'CEO'),
+(33, 'TEST', 'Mother', 38, 1231231231, 'CEO'),
+(34, 'BETA', 'Father', 38, 1231231231, 'CEO'),
+(35, 'asd', 'Mother', 39, 1231231231, 'asd'),
+(36, 'asd', 'Father', 39, 1231231231, 'asd'),
+(41, 'beta', 'Mother', 42, 1231231231, 'mother'),
+(42, 'test', 'Father', 42, 1231231231, 'father'),
+(45, 'asd', 'Mother', 44, 123, 'asd'),
+(46, 'asd', 'Father', 44, 123, 'asd'),
+(47, 'qwe', 'Mother', 45, 123123, 'qwe'),
+(48, 'qwe', 'Father', 45, 1231, 'qwe');
 
 -- --------------------------------------------------------
 
@@ -251,7 +246,7 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`id`, `full_amount`, `down_payment`, `monthly_payment`, `tuition_fee`, `energy_fee`, `internet_lab`, `speech_lab`, `book`, `created_at`, `updated_at`) VALUES
-(1, 25000, 10000, 1000, 5000, 1000, 1000, 1000, '[\'1100\',\'1200\',\'1300\',\'1400\']', '2018-09-20 06:14:26', '0000-00-00 00:00:00');
+(1, 25000, 10000, 1000, 5000, 1000, 1000, 1000, '1100|1200|1300|1400', '2018-09-25 02:14:05', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -276,11 +271,31 @@ CREATE TABLE `schedule` (
 --
 
 INSERT INTO `schedule` (`schedule_id`, `teacher_id`, `subject_id`, `section_id`, `schedule_name`, `schedule_time_id`, `schedule_type`, `created_at`, `updated_at`) VALUES
-(19, 9, 19, 32, '8:00am - 9:00am', 1, 1, '2018-09-21 02:17:56', NULL),
-(20, 10, 20, 34, '8:00am - 9:00am', 1, 1, '2018-09-21 02:18:09', NULL),
-(21, 11, 21, 35, '8:00am - 9:00am', 1, 1, '2018-09-21 02:18:18', NULL),
-(22, 12, 22, 33, '8:00am - 9:00am', 1, 1, '2018-09-21 02:18:29', NULL),
-(23, 10, 23, 34, '9:00am - 10:00am', 2, 1, '2018-09-21 04:26:07', NULL);
+(25, 13, 26, 36, '8:00am - 9:00am', 1, 1, '2018-09-23 22:34:47', NULL),
+(26, 13, 27, 37, '9:00am - 10:00am', 2, 1, '2018-09-23 22:34:58', NULL),
+(27, 16, 28, 38, '8:00am - 9:00am', 1, 1, '2018-09-23 22:35:21', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `school_details`
+--
+
+CREATE TABLE `school_details` (
+  `id` int(11) NOT NULL,
+  `school_name` varchar(255) NOT NULL,
+  `school_year` varchar(255) NOT NULL,
+  `school_address` varchar(255) NOT NULL,
+  `status` int(11) NOT NULL,
+  `enrollment_year` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `school_details`
+--
+
+INSERT INTO `school_details` (`id`, `school_name`, `school_year`, `school_address`, `status`, `enrollment_year`) VALUES
+(1, 'Our Lady of Assumption College', '2018-2019', 'N. Gonzales St. Brgy. Poblacion Tanauan City', 1, 2018);
 
 -- --------------------------------------------------------
 
@@ -295,14 +310,6 @@ CREATE TABLE `second_year_grades` (
   `student_id` int(11) NOT NULL,
   `quarter` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `second_year_grades`
---
-
-INSERT INTO `second_year_grades` (`grade_id`, `score`, `subject_id`, `student_id`, `quarter`) VALUES
-(1, 50, 23, 36, 1),
-(2, 12, 20, 36, 1);
 
 -- --------------------------------------------------------
 
@@ -325,10 +332,9 @@ CREATE TABLE `section` (
 --
 
 INSERT INTO `section` (`id`, `year`, `capacity`, `section_name`, `teacher_id`, `created_at`, `updated_at`) VALUES
-(32, '1', 30, 'Mahogani', 9, '2018-09-21 02:16:13', '2018-09-20 18:16:13'),
-(33, '4', 50, 'Santol', 12, '2018-09-21 02:16:30', '2018-09-20 18:16:30'),
-(34, '2', 50, 'Narra', 10, '2018-09-21 02:16:20', '2018-09-20 18:16:20'),
-(35, '3', 50, 'Buko', 11, '2018-09-21 02:16:25', '2018-09-20 18:16:25');
+(36, '1', 1, 'First-A', 13, '2018-09-23 22:35:33', '2018-09-23 14:35:33'),
+(37, '1', 2, 'First-B', 16, '2018-09-23 22:35:40', '2018-09-23 14:35:40'),
+(38, '2', 3, 'Second-A', 14, '2018-09-23 22:35:45', '2018-09-23 14:35:45');
 
 -- --------------------------------------------------------
 
@@ -360,17 +366,21 @@ CREATE TABLE `students` (
   `status` int(11) NOT NULL DEFAULT '0',
   `pin` int(4) NOT NULL DEFAULT '1234',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT NULL
+  `updated_at` datetime DEFAULT NULL,
+  `old_student` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `section_id`, `first_name`, `middle_name`, `last_name`, `address`, `religion`, `gender`, `birthdate`, `guardian_email`, `guardian_number`, `guardian_name`, `guardian_occupation`, `guardian_relation`, `old_school_name`, `old_school_address`, `old_year_level`, `old_school_year`, `payment_id`, `qr_code`, `status`, `pin`, `created_at`, `updated_at`) VALUES
-(34, 32, 'qwe', 'qwe', 'qwe', 'asd', 'qweqwe', 1, '2018-09-10', 'kkyle.malitig@gmail.com', 123123, 'asd', 'asd', 'asd', 'qwe', 'qwe', 0, '2312312', 1, '8d3498ad9f7381a0e83b0b99c4c5e6d5', 1, 1234, '2018-09-21 04:05:19', '2018-09-21 04:05:19'),
-(35, 33, 'qweqwe', 'qweqwe', 'qweqwe', 'qweqwe', 'qweqwe', 2, '2018-09-09', 'joshuakyle.malitig@gmail.com', 123123, 'asdasdasd', 'asd', 'asd', 'qweqwe', 'qweqweqwe', 3, '2018', 1, '8f33b326a4b25bc209819202ed578b75', 1, 1234, '2018-09-21 04:05:24', '2018-09-21 04:05:24'),
-(36, 34, 'Pigo', 'Kulas', 'Kulas', 'qweqwe', NULL, 1, '2018-09-10', 'joshuakyle.malitig@gmail.com', 23123123, 'Kulas Pigo', 'Test', 'Test', 'Kulas', 'qweqwe', 1, '123456', 1, '46194e896cb45f90d8b166c64190ae5b', 1, 1234, '2018-09-21 04:21:28', '2018-09-21 04:21:28');
+INSERT INTO `students` (`id`, `section_id`, `first_name`, `middle_name`, `last_name`, `address`, `religion`, `gender`, `birthdate`, `guardian_email`, `guardian_number`, `guardian_name`, `guardian_occupation`, `guardian_relation`, `old_school_name`, `old_school_address`, `old_year_level`, `old_school_year`, `payment_id`, `qr_code`, `status`, `pin`, `created_at`, `updated_at`, `old_student`) VALUES
+(37, 37, 'Test', 'Test', 'Beta', 'Beta Test Address', 'test', 1, '1999-09-03', 'mjiem1221@gmail.com', 1231231231, 'Beta Test', 'CEO', 'Parent', 'Jan sa Tabi Elementary School', 'Sa barangay namin Street', 0, '2018', 1, 'cfa8754b9c7a7c91d868085f808e888d', 1, 1234, '2018-09-24 15:32:52', '2018-09-24 15:27:44', 0),
+(38, 36, 'Test', 'Beta', 'Beta', 'Beta Address', 'asdasd', 1, '2018-09-01', 'mjiem1221@gmail.com', 1231231231, 'Beta Test', 'CEO', 'Parent', 'BETA TEST SCHOOL', 'TEST BETA ADDRESS', 0, '2018', 1, 'acf62074817a4ce9c9061e4983eaedcc', 1, 1234, '2018-09-24 15:27:46', '2018-09-24 15:27:46', 0),
+(39, 37, 'Test', 'TEST', 'Last Beta', 'asd', 'asdasd', 1, '2018-09-01', 'mjiem1221@gmail.com', 1231231231, 'Beta TEST', 'TEST', 'TEST', 'asd', 'asd', 0, '2018', 1, '8df539812cc1832a9c1b5b6186ad10b4', 1, 1234, '2018-09-24 15:28:06', '2018-09-24 15:28:06', 0),
+(42, NULL, 'Test', 'Test', 'Beta', 'Beta Test Address', 'test', 1, '1999-09-03', 'mjiem1221@gmail.com', 1231231231, 'Beta Test', 'CEO', 'Parent', 'Our Lady of Assumption College', 'N. Gonzales St. Brgy. Poblacion Tanauan City', 2, '2017-2018', 1, 'c18c059b415df8a329524a10a664fb60', 1, 1234, '2018-09-23 22:55:02', '2018-09-23 22:55:02', 0),
+(44, NULL, 'Asd', 'Asd', 'Asd', 'asd', 'asd', 1, '2018-09-10', 'joshuakyle.malitig@gmail.com', 123123, 'asd', 'asd', 'asd', 'asd', 'asd', 0, '1232-1312', 2, '7faa438d5230458473aba0415b39f7a0', 0, 1234, '2018-09-25 02:33:31', '2018-09-24 15:33:06', 0),
+(45, NULL, 'Qwe', 'Qwe', 'Qwe', '123qwe', 'qweqwe', 1, '2018-09-17', 'kyle@numverify.com', 123123, 'qwe', 'zxc', 'asd', 'qwe', 'qweqwe', 1, '2018-2019', 1, '9f55ffd2ca6e9579708698e0e2ff58e5', 0, 1234, '2018-09-26 14:50:59', '2018-09-26 14:31:15', 1);
 
 -- --------------------------------------------------------
 
@@ -392,11 +402,9 @@ CREATE TABLE `subjects` (
 --
 
 INSERT INTO `subjects` (`id`, `subject_name`, `year`, `schedule_id`, `created_at`, `updated_at`) VALUES
-(19, 'Science', 1, 19, '2018-09-21 02:17:56', '2018-09-20 18:17:56'),
-(20, 'Biology', 2, 20, '2018-09-21 02:18:09', '2018-09-20 18:18:09'),
-(21, 'Chemistry', 3, 21, '2018-09-21 02:18:18', '2018-09-20 18:18:18'),
-(22, 'Physics', 4, 22, '2018-09-21 02:18:29', '2018-09-20 18:18:29'),
-(23, 'English-2', 2, 23, '2018-09-21 04:26:07', '2018-09-20 20:26:07');
+(26, 'Filipino', 1, 25, '2018-09-23 22:34:47', '2018-09-23 14:34:47'),
+(27, 'Filipino', 1, 26, '2018-09-23 22:34:58', '2018-09-23 14:34:58'),
+(28, 'Biology', 2, 27, '2018-09-23 22:35:21', '2018-09-23 14:35:21');
 
 -- --------------------------------------------------------
 
@@ -422,10 +430,10 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`id`, `user_id`, `first_name`, `last_name`, `contact_number`, `gender`, `type`, `birth_date`, `created_at`, `updated_at`) VALUES
-(9, 24, 'teacher1', 'teacher1', '123123123', 'Male', 1, '2018-09-28', '2018-09-20 18:14:47', NULL),
-(10, 25, 'teacher2', 'teacher2', '123123123', 'Femal', 1, '2018-09-27', '2018-09-20 18:15:06', NULL),
-(11, 26, 'teacher3', 'teacher3', '123123123', 'Male', 1, '2018-09-27', '2018-09-20 18:15:40', NULL),
-(12, 27, 'teacher4', 'teacher4', '123123123', 'Femal', 1, '2018-09-27', '2018-09-20 18:16:05', NULL);
+(13, 28, 'Teacher1', 'Teacher1', '1231231231', 'Male', 1, '1995-09-01', '2018-09-23 14:29:56', NULL),
+(14, 29, 'Teacher4', 'Teacher4', '1231231231', 'Male', 1, '2018-09-01', '2018-09-23 14:30:30', NULL),
+(15, 30, 'Teacher3', 'Teacher3', '1231231231', 'Femal', 0, '2018-01-06', '2018-09-23 14:31:07', NULL),
+(16, 31, 'Teacher2', 'Teacher2', '1231231231', 'Male', 1, '2018-08-03', '2018-09-23 14:31:36', NULL);
 
 -- --------------------------------------------------------
 
@@ -463,43 +471,37 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `remember_token`, `user_role`, `created_at`, `updated_at`) VALUES
-(1, 'kyle', 'test@email.com', '$2y$10$h7yfcxfYTWamLzqxo0WBFOVokuRSyY5Iy8NxLIpsL2Qc/yPZn8cFm', 'WO3Ral7o6mtYPVddTxW7JThqZFp8gJ2t23zqujkXrmB4Ff9x9McLzV7Ju28z', 0, '2018-09-02 04:17:36', '2018-09-02 04:17:36'),
+(1, 'admin', 'test@email.com', '$2y$10$h7yfcxfYTWamLzqxo0WBFOVokuRSyY5Iy8NxLIpsL2Qc/yPZn8cFm', 'LNBX0rA4AcGI4NHKX9pH7w4l3kOc48M0wnlGr7DF8NG4TawK5GoIsZtR7TfJ', 0, '2018-09-02 04:17:36', '2018-09-02 04:17:36'),
 (2, 'test', 'mjiem1221@gmail.com', '$2y$10$df/9o1qYtEK718ny9FFBP.ffwuFyis/ogvZ3jjaOSBtpIXDwN0dY2', 'qcesTsKWyRXzpSkwK0T9ZTKFJw7NvE3UBjKys3KEubIvQ3GgyVa5yxhX0Sm5', 0, '2018-09-02 04:35:04', '2018-09-02 04:35:04'),
 (10, 'qweqweqwe', 'asdasd', '$2y$10$vHiXJcqg90Xhu4rfDXmQCOMcm7XRO2uDruwX2NodrnzQHCDRaggki', NULL, 0, NULL, NULL),
 (13, 'agent', 'qwe@kyle.com', '$2y$10$BZd9F4Fxr6hsNSmgubvk4OG7AKvQR3ziGCy8osMSuH53Iu1znILxi', NULL, 1, NULL, '2018-09-05 05:38:22'),
 (14, 'felix', 'arde@email.com', '$2y$10$8X8IBnBBuVQq.0W/2DK91eF8Zhz566Noiz2PQtaJMB9He2vaEwnAe', NULL, 1, NULL, '2018-09-05 07:25:16'),
 (19, 'cswhitelabel', 'jompol1234@gmai.com', '$2y$10$dzQTWkxx8bywzO5HKm.xn.0v.jCMtwSWHDLeX1S1UAbNq4IDG33Aq', NULL, 1, NULL, NULL),
-(24, 'teacher1', 'teacher1@email.com', '$2y$10$D8LQHlfT9zAiV9Pq3AlmA.oziVPdIuTQmlQ5U0zLt3hd2gh6AILxG', 'XILjeLmVQDtEW9CG5cMjojo6wvnrdzp7IDw0ign4vqZyHMccA7ttXYPIgMio', 1, '2018-09-20 18:14:47', NULL),
-(25, 'teacher2', 'teacher2@email.com', '$2y$10$AcPKXfbDYLuzITm4583KNePnBIVbNR1gWzXacwqBY6Y7sIkXNPWEm', 'p7IHBa156LbaKZfFdMk0J5xTRTY0UBB0cV5mzJpShRAxuQKHPUH2HxgWprLX', 1, '2018-09-20 18:15:06', NULL),
-(26, 'teacher3', 'teacher3@email.com', '$2y$10$c6MpxzQJs1RTJwS5Gv9Dh.axLZpB2f8HMyePPdyrhRz2YpSPTR5zq', NULL, 1, '2018-09-20 18:15:40', NULL),
-(27, 'teacher4', 'teacher4@gmail.com', '$2y$10$h2R77Y1uXAmU8H9atSZhke2mhhXxEg08VyQxjhVIF9NF093HCLl/q', NULL, 1, '2018-09-20 18:16:05', NULL);
+(28, 'Teacher1', 'test@email.com', '$2y$10$Ye.yRr/h16sTga2sLvgN3exp8cRCwboU/ncTyIZFpE0h2KU93oyxy', 'bNNKVj94CbXU6UsHIPl7bea0ob6pbvzyDqKR2GgHs6CgCyEnna7hzU7DstmF', 1, '2018-09-23 14:29:56', NULL),
+(29, 'Teacher4', 'test@email.com', '$2y$10$3kkYGYtxq3ZKSnY3nheFVurFKDjC7cnPIwgkywtnm03ooX12rLJqW', NULL, 1, '2018-09-23 14:30:30', NULL),
+(30, 'Teacher3', 'test@email.com', '$2y$10$tL7M0Yxpq4QRwdTSMY6/COYttgTu7ra6OXUlw/bHFm0qlEiaCM6eK', NULL, 1, '2018-09-23 14:31:07', NULL),
+(31, 'Teacher2', 'test@email.com', '$2y$10$N.En6QFJ.fo3/8u0n7n4pOJteLUG5tyRMz.8r6dSzYFOBXUERWzJi', NULL, 1, '2018-09-23 14:31:36', NULL);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `1_mahogani`
+-- Indexes for table `1_first-a`
 --
-ALTER TABLE `1_mahogani`
+ALTER TABLE `1_first-a`
   ADD PRIMARY KEY (`attendance_id`);
 
 --
--- Indexes for table `2_narra`
+-- Indexes for table `1_first-b`
 --
-ALTER TABLE `2_narra`
+ALTER TABLE `1_first-b`
   ADD PRIMARY KEY (`attendance_id`);
 
 --
--- Indexes for table `3_buko`
+-- Indexes for table `2_second-a`
 --
-ALTER TABLE `3_buko`
-  ADD PRIMARY KEY (`attendance_id`);
-
---
--- Indexes for table `4_santol`
---
-ALTER TABLE `4_santol`
+ALTER TABLE `2_second-a`
   ADD PRIMARY KEY (`attendance_id`);
 
 --
@@ -563,6 +565,12 @@ ALTER TABLE `schedule`
   ADD KEY `section_id` (`section_id`);
 
 --
+-- Indexes for table `school_details`
+--
+ALTER TABLE `school_details`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `second_year_grades`
 --
 ALTER TABLE `second_year_grades`
@@ -618,27 +626,21 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `1_mahogani`
+-- AUTO_INCREMENT for table `1_first-a`
 --
-ALTER TABLE `1_mahogani`
-  MODIFY `attendance_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `1_first-a`
+  MODIFY `attendance_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `2_narra`
+-- AUTO_INCREMENT for table `1_first-b`
 --
-ALTER TABLE `2_narra`
-  MODIFY `attendance_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `1_first-b`
+  MODIFY `attendance_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `3_buko`
+-- AUTO_INCREMENT for table `2_second-a`
 --
-ALTER TABLE `3_buko`
-  MODIFY `attendance_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `4_santol`
---
-ALTER TABLE `4_santol`
+ALTER TABLE `2_second-a`
   MODIFY `attendance_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -675,7 +677,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `parent`
 --
 ALTER TABLE `parent`
-  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `parent_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `payment`
@@ -687,7 +689,13 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `school_details`
+--
+ALTER TABLE `school_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `second_year_grades`
@@ -699,25 +707,25 @@ ALTER TABLE `second_year_grades`
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `teachers`
 --
 ALTER TABLE `teachers`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `thrid_year_grades`
@@ -729,7 +737,7 @@ ALTER TABLE `thrid_year_grades`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Constraints for dumped tables
@@ -767,7 +775,7 @@ ALTER TABLE `grade`
 -- Constraints for table `parent`
 --
 ALTER TABLE `parent`
-  ADD CONSTRAINT `parent_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`);
+  ADD CONSTRAINT `parent_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `schedule`
