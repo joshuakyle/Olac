@@ -45,7 +45,7 @@ class StudentController extends Controller
         }else{
             $like = '';
         }
-        $data['students'] = $this->student->where('last_name','like','%'.$like.'%')->paginate(30);
+        $data['students'] = $this->student->where('last_name','like','%'.$like.'%')->where('old_student',0)->where('status',1)->paginate(30);
         $data['module_name'] = 'student-list';
         $data['module_header'] = 'Student Management';
         return view('pages.studentList',$data);
@@ -53,12 +53,12 @@ class StudentController extends Controller
 
     public function getUnconfirmed()
     {
-        return $this->student->where('status',0)->count();
+        return $this->student->where('status',0)->where('old_student',0)->count();
     }
 
     public function getUnconfirmedDetails()
     {
-        return $this->student->where('status',0)->get();
+        return $this->student->where('status',0)->where('old_student',0)->get();
     }
 
     public function qrgenerate(Request $req)

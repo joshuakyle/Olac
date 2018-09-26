@@ -12,6 +12,7 @@ use App\Model\Student;
 use App\Model\StudentParent;
 use App\Model\Section;
 use App\Model\Payment;
+use App\Model\School;
 use DB;
 use App\User;
 use QRCode;
@@ -29,6 +30,7 @@ class EnrollmentController extends Controller
         $this->parent = new StudentParent;
         $this->section = new Section;
         $this->payment = new Payment;
+        $this->school = new School;
     }
     /**
      * Show the profile for the given user.
@@ -44,20 +46,31 @@ class EnrollmentController extends Controller
 
     public function create(Request $request)
     {
+        $school = $this->school->first();
         $old_year = $request->get("grade/level");
         $old_school_name = $request->get("school_name");
         $old_year_level = $request->get("grade/level");
         $old_school_year = $request->get("school_year");
         $old_school_address = $request->get("school_address");
         $old = false;
+        $student_data = $this->getStudentDetails(ucfirst($request->get("last_name")),ucfirst($request->get("first_name")),ucfirst($request->get("middle_name")));
+
+        if(!is_null($student_data)){
+            if(date_format(date_create($student_data->created_at),'Y') == $school->enrollment_year){
+                return response()->json(['status'=>3,'message'=>'Failed, We already recieved an application from this student for school year: '.$school->school_year]);
+            }
+        }
+
         if(!is_null($request->get("old_student"))){
-            $old_student = $this->getStudentDetails($request->get("last_name"),$request->get("first_name"),$request->get("middle_name"));
-            if(!is_null($old_student)){
-                $old_year_level = $old_student->year + 1;
-                $old_school_address = 'N. Gonzales St. Brgy. Poblacion Tanauan City';
-                $old_school_name = 'Our Lady of Assumption College';
-                $old_school_year = getPreviousSchoolYear();
-                $old = true;
+            if(!is_null($student_data)){
+                if($student_data->old_student){ 
+                    $old_year_level = $student_data->year + 1;
+                    $old_school_address = $school->school_address;
+                    $old_school_name = $school->school_name;
+                    $old_school_year = getPreviousSchoolYear();
+                    $old = true;
+                }
+                
             }else{
                 return response()->json(['status'=>3,'message'=>'Sorry, This student does not exist in our database.']);
             }
@@ -136,11 +149,11 @@ class EnrollmentController extends Controller
     public function getStudentDetails($lastname,$middle,$firstname)
     {
         return $this->student->select('students.*','s.year')
-        ->where('first_name',$firstname)
-        ->where('last_name',$lastname)
-        ->where('middle_name',$middle)
-        ->join('section as s','students.section_id','=','s.id')
-        ->first();
+            ->where('first_name',$firstname)
+            ->where('last_name',$lastname)
+            ->where('middle_name',$middle)
+            ->leftJoin('section as s','students.section_id','=','s.id')
+            ->first();
     }
 
     public function qrcode($last_name,$section_id,$student_id,$qr_code)
@@ -154,6 +167,14 @@ class EnrollmentController extends Controller
                 ->setOutfile(getStoragePath().'/'.$section_id.'/'.$name.'.png')
                 ->setSize(8)
                 ->png();
+    }
+
+    public function option()
+    {
+        $data['school'] = $this->school->first();
+        $data['module_name'] = 'school-option';
+        $data['module_header'] = 'School Option';
+        return view('pages.schoolOptions',$data);
     }
 
 }

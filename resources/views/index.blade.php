@@ -91,7 +91,9 @@
         <div class="nav-wrapper" style="border-bottom: 3px solid white">
           <a href="#" class="brand-logo center"><img class="circle logo" src="{{asset('img/olac-logo.jpg')}}"></a>
           <ul class="right hide-on-med-and-down">
+            @if($school->status == 1)
             <li><a href="{{ route('enroll')}}">Enroll now!</a></li>
+            @endif
             <li><a href="{{ route('studentLogin')}}">Check you Grade!</a></li>
             <li><a href="{{ url('/login')}}">Teacher Login</a></li>
         </ul>

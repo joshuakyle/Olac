@@ -155,7 +155,6 @@
     $('.info-trigger').click(function(){
           var id = $(this).data('id');
           $.get("{{url('/student/info')}}/"+id,function(val){
-            console.log(val);
               $('#first_name').val(val.first_name);
               $('#last_name').val(val.last_name);
               $('#middle_name').val(val.middle_name);

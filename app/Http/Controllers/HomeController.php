@@ -8,10 +8,14 @@ use App\Model\Schedule;
 use App\Model\Teacher;
 use App\Model\Student;
 use App\Model\Section;
+use App\Model\School;
 use App\User;
 use Auth;
 use Schema;
 use DB;
+use Validator;
+
+use Illuminate\Support\Facades\Hash;
 class HomeController extends Controller
 {
     /**
@@ -27,6 +31,7 @@ class HomeController extends Controller
         $this->teacher = new Teacher;
         $this->user = new User;
         $this->section = new Section;
+        $this->school = new School;
         $this->middleware('auth');
 
     }
@@ -39,9 +44,10 @@ class HomeController extends Controller
     public function index()
     {
         if(Auth::user()->user_role == 0){
-            $data['student_confirmed'] = $this->student->where('status',1)->count();
-            $data['student_unconfirmed'] = $this->student->where('status',0)->count();
-            $data['total_students'] = $this->student->count();
+            $data['student_confirmed'] = $this->student->where('status',1)->where('old_student',0)->count();
+            $data['student_unconfirmed'] = $this->student->where('status',0)->where('old_student',0)->count();
+            $data['total_students'] = $this->student->where('old_student',0)->count();
+            $data['old_students'] = $this->student->where('old_student',1)->count();
             $data['subject'] = $this->subject->count();
             $data['teacher'] = $this->teacher->count();
             $data['section'] = $this->section->count();
@@ -156,4 +162,36 @@ class HomeController extends Controller
 
     }
 
+    public function adminData(Request $req)
+    {
+        if(Hash::check($req->data,Auth::user()->password)){
+            return response()->json(['status'=>1]);
+        }
+        return response()->json(['status'=>0,'message'=>'Failed to update data, Password does not match.']);
+    }
+
+    public function updateSchool(Request $req)
+    {
+        $validator = Validator::make($req->all(),['school_address'=>'required','school_name'=>'required','school_year'=>'required']);
+        $enrollment_year = explode('-',$req->get('school_year'));
+        if($validator->fails()){
+            return response()->json(['status'=>2,'message'=>$validator->messages()]);
+        }
+
+        $this->school->where('id',1)->update(['school_name' => $req->get('school_name'),
+            'school_address' => $req->get('school_address'),
+            'school_year' => $req->get('school_year'),
+            'enrollment_year'=>$enrollment_year[0]]);
+
+        return response()->json(['status'=>1,'message'=>'Data has been updated.']);
+    }
+
+    public function updateEnrollment()
+    {
+        $school = $this->school->first();
+        $status = $school->status == 1 ? 0 : 1; 
+        $this->school->where('id',1)->update(['status'=>$status]);
+
+        return response()->json(['status' => 1]);
+    }
 }

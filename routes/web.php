@@ -1,4 +1,5 @@
 <?php
+use App\Model\School;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,6 +67,10 @@ Route::group(['middleware'=>['auth']],function(){
 		Route::get('/students/unconfirmed', 'StudentController@getUnconfirmed');
 		Route::get('/students/unconfirmed/details', 'StudentController@getUnconfirmedDetails');
 		Route::post('/student/reject', 'StudentController@rejectStudents')->name('update-studet-reject');
+		Route::get('/school/options', 'EnrollmentController@option')->name('school-option');
+		Route::post('/admin/data', 'HomeController@adminData')->name('admin-data');
+		Route::post('/school/update', 'HomeController@updateSchool')->name('update-school-data');
+		Route::post('/school/enrollment', 'HomeController@updateEnrollment')->name('update-enrollment');
 
 	// });
 
@@ -96,6 +101,8 @@ Route::get('/enroll', 'EnrollmentController@index')->name('enroll');
 Route::get('/qrcode', 'EnrollmentController@qrcode');
 Route::post('/addstudent', 'EnrollmentController@create');
 Route::get('/index', function(){
-	  return view('index');
+	$school = new School;
+	$data['school'] = $school->first();
+	return view('index',$data);
 });
 

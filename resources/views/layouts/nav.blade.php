@@ -55,6 +55,7 @@
         <li class="{{ isset($module_name) ? ($module_name == 'subject-list') ? 'active' : '' : ''}}"><a class="waves-effect" href="{{ route('subject-list') }}"><i class="material-icons">dns</i>Subjects</a></li>
         <li class="{{ isset($module_name) ? ($module_name == 'schedule-list') ? 'active' : '' : ''}}"><a class="waves-effect" href="{{ route('schedule-list') }}"><i class="material-icons">date_range</i>Schedule</a></li>
         <li class="{{ isset($module_name) ? ($module_name == 'student-list') ? 'active' : '' : ''}}"><a class="waves-effect" href="{{ route('student-list') }}"><i class="material-icons">people</i>Students</a></li>
+        <li class="{{ isset($module_name) ? ($module_name == 'school-option') ? 'active' : '' : ''}}"><a class="waves-effect" href="{{ route('school-option') }}"><i class="material-icons">vpn_lock</i>School Options</a></li>
         @elseif(Auth::user()->user_role == 1)
         {{-- <li class="{{ isset($module_name) ? ($module_name == 'dashboard') ? 'active' : '' : ''}}"><a class="waves-effect" href="{{ route('dashboard') }}"><i class="material-icons">dashboard</i>Dashboard</a></li> --}}
         <li class="{{ isset($module_name) ? ($module_name == 'attendance') ? 'active' : '' : ''}}"><a class="waves-effect" href="{{ route('teacherIndex') }}"><i class="material-icons">dashboard</i>Attendance</a></li>
@@ -156,6 +157,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 <script type="text/javascript">
     $('.datepicker').pickadate({
         selectMonths: true, // Creates a dropdown to control month

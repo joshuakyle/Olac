@@ -274,7 +274,7 @@ bgcolor
 							<div id="page-5">
 								<div class="row">
 									<div style="text-align: center;padding: 50px;">
-									<h4> We are sorry to say, That we already met the total of enrollees for <span class="year_level" style="color:red"></span> this year.</h4>
+									<h4> We are sorry to say, That we already met the total of number enrollees for <span class="year_level" style="color:red"></span> this year.</h4>
 									<br/>
 									<div class="center-align">
 										<form method="get" action="{{url('/index')}}">
