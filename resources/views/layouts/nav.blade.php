@@ -23,7 +23,7 @@
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com"><!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {{-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> --}}
     <!--Import materialize.css-->
 
     <!-- Styles -->
@@ -31,9 +31,9 @@
     <link href="{{ asset('css/datatables.css') }}" rel="stylesheet">
 
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+    <link rel="stylesheet" href="{{ asset('css/materializecss.css') }}">
+    <link href="{{ asset('css/material-icons.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/jquery-confirm.css') }}">
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -153,11 +153,10 @@
 </footer>
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/materialize.min.js') }}"></script>
+<script src="{{ asset('js/jquery-confirm.min.js') }}"></script>
+<script src="{{ asset('js/jquery.mask.js') }}"></script>
 <script type="text/javascript">
     $('.datepicker').pickadate({
         selectMonths: true, // Creates a dropdown to control month

@@ -14,15 +14,13 @@
     
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com"><!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
+    <link href="{{ asset('css/material-icons.css') }}" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/enroll.css') }}" rel="stylesheet">
 
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="{{ asset('css/materializecss.css') }}">
 
 
     <!--Let browser know website is optimized for mobile-->
@@ -33,9 +31,9 @@
         @yield('content')
     </div>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+<script src="{{ asset('js/jquery.min.js') }}"></script>
+<script src="{{ asset('js/materialize.min.js') }}"></script>
+<script src="{{ asset('js/jquery.mask.js') }}"></script>
 <!-- Scripts -->
 <script type="text/javascript">
     $('.datepicker').pickadate({

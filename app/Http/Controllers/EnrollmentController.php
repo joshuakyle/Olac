@@ -40,7 +40,7 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        $data['payment'] = $this->payment->select('full_amount','down_payment','monthly_payment','tuition_fee','energy_fee','internet_lab','speech_lab')->first();
+        $data['payment'] = $this->payment->first();
         return view('pages.enrollment',$data);
     }
 

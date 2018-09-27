@@ -23,22 +23,22 @@ bgcolor
 									<hr/>
 									<div class="row">
 										<div class="input-field col s12">
-											<input id="guardian_name" name="guardian_name" type="text" required>
+											<input id="guardian_name" name="guardian_name" type="text" >
 											<label for="guardian_name">Full name</label>
 										</div>
 									</div>
 									<div class="row">
 										<div class="input-field col s6">
-											<input name="relation" type="text" required>
+											<input id="relation" name="relation" type="text" >
 											<label for="relation">Relation</label>
 										</div>
 										<div class="input-field col s6">
-											<input name="occupation" type="text" required>
+											<input id="occupation" name="occupation" type="text" >
 											<label for="occupation">Occupation</label>
 										</div>
 										<div class="input-field col s6">
-											<input name="guardian_number" type="number" required>
-											<label for="guardian_number">Contact Number</label>
+											<input id="guardian_number" name="guardian_number" type="text" >
+											<label for="guardian_number">Contact Number (+63)</label>
 										</div>
 									</div>
 									<div class="row">
@@ -64,32 +64,32 @@ bgcolor
 								<form id="form-2" method="POST" action="">
 									<div class="row">
 										<div class="input-field col s4">
-											<input id="last_name" name="last_name" type="text" required>
+											<input id="last_name" name="last_name" type="text">
 											<label for="last_name">Last Name</label>
 										</div>
 										<div class="input-field col s4">
-											<input id="first_name" name="first_name" type="text" required>
+											<input id="first_name" name="first_name" type="text">
 											<label for="first_name">First Name</label>
 										</div>
 										<div class="input-field col s4">
-											<input id="middle_name" name="middle_name" type="text" required>
+											<input id="middle_name" name="middle_name" type="text">
 											<label for="middle_name">Middle Name</label>
 										</div>
 									</div>
 									<div class="row">
 										<div class="input-field col s3">
-											<input id="birth_place" name="birth_place" type="text" required>
+											<input id="birth_place" name="birth_place" type="text">
 											<label for="birth_place">Address</label>
 										</div>
 									</div>
 									<div class="row">
 										<div class="input-field col s3">
-											<input id="birthdate" name="birthdate" class="datepicker" type="text" required>
+											<input id="birthdate" name="birthdate" class="datepicker" type="text">
 											<label for="birthdate">Birthdate</label>
 										</div>
 										
 										<div class="input-field col s3">
-											<select id="gender" name="gender" required>
+											<select id="gender" name="gender">
 												<option value="" selected>Choose your option</option>
 												<option value="1">Male</option>
 												<option value="2">Female</option>
@@ -108,19 +108,19 @@ bgcolor
 									<hr/>
 									<div class="row">
 										<div class="input-field col s4">
-											<input id="school_name" name="school_name" type="text" required>
+											<input id="school_name" name="school_name" type="text">
 											<label for="school_name">School Name</label>
 										</div>							   
 									</div>
 									<div class="row">
 										<div class="input-field col s4">
-											<input id="school_address" name="school_address" type="text" required>
+											<input id="school_address" name="school_address" type="text">
 											<label for="school_address">Address</label>
 										</div>
 									</div>
 									<div class="row">
 										<div class="input-field col s4">
-											<select id="gradelevel" name="grade/level" required>
+											<select id="gradelevel" name="grade/level">
 												<option value="" selected>Choose your option</option>
 												<option value="0">Grade 6</option>
 												<option value="1">First Year</option>
@@ -130,7 +130,7 @@ bgcolor
 											<label for="gradelevel">Grade/Level</label>
 										</div>
 										<div class="input-field col s4">
-											<input id="school_year" name="school_year" placeholder="0000-0000" type="text" required>
+											<input id="school_year" name="school_year" placeholder="0000-0000" type="text">
 											<label for="school_year">SY</label>
 										</div>
 									</div>
@@ -139,11 +139,11 @@ bgcolor
 									<hr/>
 									<div class="row">
 										<div class="input-field col s6">
-											<input id="father_name" name="father_name" type="text" required>
+											<input id="father_name" name="father_name" type="text">
 											<label for="father_name">Father's name</label>
 										</div>
 										<div class="input-field col s6">
-											<input id="mother_name" name="mother_name" type="text" required>
+											<input id="mother_name" name="mother_name" type="text">
 											<label for="mother_name">Mother's name</label>
 										</div>
 									</div>
@@ -159,12 +159,12 @@ bgcolor
 									</div>
 									<div class="row">
 										<div class="input-field col s6">
-											<input id="father_contact_number" name="father_contact_number" type="number">
-											<label for="father_contact_number">Father's Contact Number</label>
+											<input id="father_contact_number" name="father_contact_number" type="text">
+											<label for="father_contact_number">Father's Contact Number (+63)</label>
 										</div>
 										<div class="input-field col s6">
-											<input id="mother_contact_number" name="mother_contact_number" type="number">
-											<label for="mother_contact_number">Mother's Contact Number</label>
+											<input id="mother_contact_number" name="mother_contact_number" type="text">
+											<label for="mother_contact_number">Mother's Contact Number (+63)</label>
 										</div>
 									</div>
 									<div class="row">
@@ -188,7 +188,7 @@ bgcolor
 												<option value="1">Cash</option>
 												<option value="2">Monthly Payment</option>
 											</select>
-											<label >Mode of payment</label>
+											<label for="mode">Mode of payment</label>
 										</div>
 									</div>
 									<div class="row">
@@ -229,6 +229,14 @@ bgcolor
 														<td>Speech Lab Fee</td>
 														<td>P{{ peso($payment->speech_lab) }}</td>
 													</tr>
+													<!-- <tr>
+														<td>Books Fee per year</td>
+														<?php $book = explode("|",$payment->book);?>
+														<td id="first-book">First Year : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P{{ peso((int)$book[0]) }}<br/>
+														Second Year : &nbsp;&nbsp;P{{ peso((int)$book[1]) }}<br/>
+														Third Year : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P{{ peso((int)$book[2]) }}<br/>
+														Fourth Year : &nbsp;&nbsp;&nbsp;&nbsp;P{{ peso((int)$book[3]) }}</td>
+													</tr> !-->
 
 												</tbody>
 											</table>
@@ -310,22 +318,36 @@ bgcolor
 @section('customjs')
 <script type="text/javascript">
 	$('#page-2').hide();
-	$('#page-3').hide();
+	$('#page-1').hide();
 	$('#page-4').hide();
 	$('#page-5').hide();
 	$(function(){
 		$('#school_year').mask('0000-0000');
+		$('#guardian_number').mask('000-0000-000');
+		$('#father_contact_number').mask('000-0000-000');
+		$('#mother_contact_number').mask('000-0000-000');
+
+
 		$("#form-1").submit(function(e){
-			showPage(2,1);
+			if(validateForm1()){
+				showPage(2,1);
+			}
 			return false;
+
 		});
 
 		$("#form-2").submit(function(e){
-			showPage(3,2);
+			if(validateForm2()){
+				showPage(3,2);
+			}
 			return false;
 		});
 
 		$("#form-3").submit(function(e){
+			if($('#mode').val() == ''){
+				window.Materialize.toast('Please Select a Mode of Payment',2000);
+				return false;
+			}
 			sendRequest();
 			return false;
 		});
@@ -390,12 +412,12 @@ bgcolor
 	        if(this.checked){
 	            $('#school_name').attr('disabled',true);
 	            $('#school_address').attr('disabled',true);
-	            $('#gradelevel').attr('disabled',true);
+	            $('#gradelevel').attr('disabled',true).material_select();
 	            $('#school_year').attr('disabled',true);
 	        }else{
 	            $('#school_name').attr('disabled',false);
 	            $('#school_address').attr('disabled',false);
-	            $('#gradelevel').attr('disabled',false);
+	            $('#gradelevel').attr('disabled',false).material_select();
 	            $('#school_year').attr('disabled',false);
 	         }
 
@@ -436,6 +458,105 @@ bgcolor
 					console.log('Error:', data);
 				}
 			});
+		}
+
+		function validateForm1(){
+			var name = $('#guardian_name').val();
+			var relation = $('#relation').val();
+			var occupation =$('#occupation').val();
+			var number = $('#guardian_number').val();
+
+			if(name == ''){
+				window.Materialize.toast('Full name is required',2000);
+			}
+			if(relation == ''){
+				window.Materialize.toast('Relation is required',2000);
+			}
+			if(occupation == ''){
+				window.Materialize.toast('Occupation is required',2000);
+			}
+			if(number == ''){
+				window.Materialize.toast('Contact Number is required',2000);
+			}
+			if(name == '' || relation == '' || occupation == '' || number == ''){
+				return false;
+			}else{
+				return true;
+			}
+		}
+
+		function validateForm2(){
+			var last_name = $('#last_name').val();
+			var first_name = $('#first_name').val();
+			var middle_name =$('#middle_name').val();
+			var address = $('#birth_place').val();
+			var birthdate = $('#birthdate').val();
+			var gender = $('#gender').val();
+			var old_student = $('#old_student').prop('checked');
+			var father_name = $('#father_name').val();
+			var mother_name = $('#mother_name').val();
+			var school_name = $('#school_name').val();
+			var gradelevel = $('#gradelevel').val();
+			var school_address = $('#school_address').val();
+			var school_year = $('#school_year').val();
+			var $result = true;
+			if(last_name == ''){
+				$result = false;
+				window.Materialize.toast('Full name is required',2000);
+			}
+			if(first_name == ''){
+				$result = false;
+				window.Materialize.toast('Relation is required',2000);
+			}
+			if(middle_name == ''){
+				$result = false;
+				window.Materialize.toast('Occupation is required',2000);
+			}
+			if(address == ''){
+				$result = false;
+				window.Materialize.toast('Address is required',2000);
+			}if(birthdate == ''){
+				$result = false;
+				window.Materialize.toast('Birthdate is required',2000);
+			}
+			if(gender == ''){
+				$result = false;
+				window.Materialize.toast('Gender is required',2000);
+			}
+			if(father_name == ''){
+				$result = false;
+				window.Materialize.toast('Father\'s Name is required',2000);
+			}
+			if(mother_name == ''){
+				$result = false;
+				window.Materialize.toast('Monther\'s Name is required',2000);
+			}
+
+			if(!old_student){
+				if(school_name == ''){
+				$result = false;
+				window.Materialize.toast('School Name is required',2000);
+				}
+				if(school_address == ''){
+					$result = false;
+					window.Materialize.toast('School Address is required',2000);
+				}
+				if(school_year == ''){
+					$result = false;
+					window.Materialize.toast('School Year is required',2000);
+				}
+				if(school_address == ''){
+					$result = false;
+					window.Materialize.toast('School Adress is required',2000);
+				}
+				if(gradelevel == ''){
+					$result = false;
+					window.Materialize.toast('Graede/Leve is required',2000);
+				}
+			}
+			
+			return $result;
+
 		}
 	});
 </script>
